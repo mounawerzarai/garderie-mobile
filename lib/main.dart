@@ -66,6 +66,38 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 }
+const List<Map<String, dynamic>> activites = [
+  {
+    "id": 1,
+    "titre": "Dessin et coloriage",
+    "description": "Développement de la créativité",
+    "icone": "🎨"
+  },
+  {
+    "id": 2,
+    "titre": "Jeux éducatifs",
+    "description": "Apprentissage par le jeu",
+    "icone": "🧩"
+  },
+  {
+    "id": 3,
+    "titre": "Musique et chansons",
+    "description": "Éveil musical des enfants",
+    "icone": "🎵"
+  },
+  {
+    "id": 4,
+    "titre": "Lecture de contes",
+    "description": "Découverte des histoires",
+    "icone": "📚"
+  },
+  {
+    "id": 5,
+    "titre": "Activités sportives",
+    "description": "Développement de la motricité",
+    "icone": "⚽"
+  },
+];
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -106,8 +138,19 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-      body: const Center(
-        child: Text('Liste des activités'),
+            body: ListView.builder(
+        padding: const EdgeInsets.all(8),
+        itemCount: activites.length,
+        itemBuilder: (context, index) {
+          final a = activites[index];
+          return Card(
+            child: ListTile(
+              leading: Text(a['icone'], style: const TextStyle(fontSize: 32)),
+              title: Text(a['titre']),
+              subtitle: Text(a['description']),
+            ),
+          );
+        },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
