@@ -99,8 +99,57 @@ const List<Map<String, dynamic>> activites = [
   },
 ];
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 0;
+
+  void _showMessage(String message) {
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  void _selectDrawerItem(int index) {
+    Navigator.of(context).pop(); // ferme le Drawer
+    setState(() => _selectedIndex = index);
+  }
+
+  Widget _buildBody() {
+    if (_selectedIndex == 2) {
+      return const Center(
+        child: Padding(
+          padding: EdgeInsets.all(24),
+          child: Text(
+            'Ma Garderie : une application pour découvrir '
+            'les activités proposées aux enfants.',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 18),
+          ),
+        ),
+      );
+    }
+    return ListView.builder(
+      padding: const EdgeInsets.all(8),
+      itemCount: activites.length,
+      itemBuilder: (context, index) {
+        final a = activites[index];
+        return Card(
+          child: ListTile(
+            leading: Text(a['icone'], style: const TextStyle(fontSize: 32)),
+            title: Text(a['titre']),
+            subtitle: Text(a['description']),
+            onTap: () => _showMessage(a['titre']),
+          ),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -123,37 +172,27 @@ class HomePage extends StatelessWidget {
             ListTile(
               leading: const Icon(Icons.home),
               title: const Text('Accueil'),
-              onTap: () {},
+              selected: _selectedIndex == 0,
+              onTap: () => _selectDrawerItem(0),
             ),
             ListTile(
               leading: const Icon(Icons.local_activity),
               title: const Text('Activités'),
-              onTap: () {},
+              selected: _selectedIndex == 1,
+              onTap: () => _selectDrawerItem(1),
             ),
             ListTile(
               leading: const Icon(Icons.info),
               title: const Text('À propos'),
-              onTap: () {},
+              selected: _selectedIndex == 2,
+              onTap: () => _selectDrawerItem(2),
             ),
           ],
         ),
       ),
-            body: ListView.builder(
-        padding: const EdgeInsets.all(8),
-        itemCount: activites.length,
-        itemBuilder: (context, index) {
-          final a = activites[index];
-          return Card(
-            child: ListTile(
-              leading: Text(a['icone'], style: const TextStyle(fontSize: 32)),
-              title: Text(a['titre']),
-              subtitle: Text(a['description']),
-            ),
-          );
-        },
-      ),
+      body: _buildBody(),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () => _showMessage('Nouvelle activité'),
         child: const Icon(Icons.add),
       ),
     );
