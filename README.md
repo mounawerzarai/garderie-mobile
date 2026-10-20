@@ -1,34 +1,44 @@
 # Ma Garderie
 
-Application mobile de demonstration pour une garderie d'enfants. 
+Application mobile de démonstration pour une garderie d'enfants.
 
-## Technologies utilisees
+## Technologies utilisées
 
 - Flutter (Dart)
 - Git et GitHub
 
 ## Installation
 
-// terminal
+```bash
 git clone https://github.com/mounawerzarai/garderie-mobile.git
 cd garderie-mobile
+flutter pub get
+```
 
+## Exécution
 
-## Execution
+```bash
+flutter run
+```
 
-// terminal
-par exemple Windows : `flutter run -d windows`
+Par exemple, sous Windows : `flutter run -d windows`
 
-## Captures d'ecran
+## Captures d'écran
 
 ### Splash Screen
-[Splash Screen](screenshots/splash.png)
 
-### Page principale avec la liste des activites
-[Page principale](screenshots/accueil.png)
+![Splash Screen](screenshots/splash.png)
 
-### Drawer ouvert(le menu a gauche)
-[Drawer ouvert](screenshots/drawer.png)
+### Page principale avec la liste des activités
 
-### Message affiche apres une interaction(lorsque en clique sur une activitee,son nom doit etre afficher au dessous)
-[Snackbar](screenshots/snackbar.png)
+![Page principale](screenshots/accueil.png)
+
+### Drawer ouvert (le menu à gauche)
+
+![Drawer ouvert](screenshots/drawer.png)
+
+### Message affiché après une interaction
+
+Lorsqu'on clique sur une activité, son titre s'affiche en bas de l'écran.
+
+![Snackbar](screenshots/snackbar.png)
